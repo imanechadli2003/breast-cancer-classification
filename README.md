@@ -31,9 +31,9 @@ Le script est organisé en **six grandes sections** :
 
 ## ⚙️ Exécution du projet
 
-### 🧩 Prérequis
 
-Installe les bibliothèques nécessaires :
+Installe les bibliothèques nécessaires et execute le code:
 
 ```bash
 pip install numpy matplotlib seaborn scikit-learn
+python pipeline_final.py

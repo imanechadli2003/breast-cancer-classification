@@ -3,6 +3,7 @@
 #  Jeu de données : Cancer du sein (Breast Cancer Dataset)
 # ==============================================================
 
+import os
 import numpy as np
 import matplotlib.pyplot as plt
 import seaborn as sns
@@ -10,6 +11,13 @@ from sklearn.datasets import load_breast_cancer
 from sklearn.preprocessing import StandardScaler
 from sklearn.metrics import roc_curve, roc_auc_score
 from sklearn.model_selection import train_test_split
+
+# ==============================================================
+#   CONFIGURATION DOSSIER DE SORTIE
+# ==============================================================
+
+OUTPUT_DIR = "figures"
+os.makedirs(OUTPUT_DIR, exist_ok=True)
 
 
 # ==============================================================
@@ -88,7 +96,7 @@ def compute_confusion_matrix(y_true, y_pred):
 
 
 # ==============================================================
-#   OUTILS DE VISUALISATION
+#   OUTILS DE VISUALISATION - AVEC ENREGISTREMENT AUTOMATIQUE
 # ==============================================================
 
 def plot_log_likelihood(history_train, history_val, y_train, y_val):
@@ -101,7 +109,8 @@ def plot_log_likelihood(history_train, history_val, y_train, y_val):
     plt.legend()
     plt.grid(True)
     plt.tight_layout()
-    plt.show()
+    plt.savefig(os.path.join(OUTPUT_DIR, "log_vraisemblance.png"), dpi=300)
+    plt.close()
 
 def plot_predictions_vs_observations(p_pred, y_val):
     plt.figure(figsize=(8, 5))
@@ -113,7 +122,8 @@ def plot_predictions_vs_observations(p_pred, y_val):
     plt.legend()
     plt.grid(True)
     plt.tight_layout()
-    plt.show()
+    plt.savefig(os.path.join(OUTPUT_DIR, "predictions_vs_observations.png"), dpi=300)
+    plt.close()
 
 def plot_confusion_matrix(conf_mat):
     plt.figure(figsize=(5, 4))
@@ -124,7 +134,8 @@ def plot_confusion_matrix(conf_mat):
     plt.ylabel("Réel")
     plt.title("Matrice de confusion")
     plt.tight_layout()
-    plt.show()
+    plt.savefig(os.path.join(OUTPUT_DIR, "confusion_matrix.png"), dpi=300)
+    plt.close()
 
 def plot_roc_curve(fpr, tpr, auc):
     plt.figure(figsize=(6, 5))
@@ -136,7 +147,8 @@ def plot_roc_curve(fpr, tpr, auc):
     plt.legend()
     plt.grid(True)
     plt.tight_layout()
-    plt.show()
+    plt.savefig(os.path.join(OUTPUT_DIR, "roc_curve.png"), dpi=300)
+    plt.close()
 
 
 # ==============================================================
@@ -175,11 +187,12 @@ def plot_decision_boundary_pca(X, y, w, title="Frontière de décision (PCA manu
     plt.legend()
     plt.grid(True)
     plt.tight_layout()
-    plt.show()
+    plt.savefig(os.path.join(OUTPUT_DIR, "decision_boundary_pca.png"), dpi=300)
+    plt.close()
 
 
 # ==============================================================
-# 5️  PIPELINE PRINCIPAL
+#  PIPELINE PRINCIPAL
 # ==============================================================
 
 def main():
@@ -234,6 +247,8 @@ def main():
     plot_confusion_matrix(conf_mat)
     plot_roc_curve(fpr, tpr, auc)
     plot_decision_boundary_pca(X_val[:, 1:], y_val, beta_hat)
+
+    print(f"\n Toutes les figures ont été enregistrées dans le dossier : '{OUTPUT_DIR}'")
 
 
 # ==============================================================
