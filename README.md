@@ -1,13 +1,5 @@
 #  Breast cancer classification
 
-##  Objectif du projet
-Ce projet a pour but d’**implémenter manuellement la régression logistique** à partir de zéro (sans utiliser `sklearn.linear_model.LogisticRegression`) afin de :
-
-- comprendre le fonctionnement mathématique du modèle ;
-- maîtriser la **descente de gradient** et la **log-vraisemblance** ;
-- construire les **métriques d’évaluation** et les **visualisations** associées ;
-- comparer les résultats à une implémentation de référence (`sklearn`).
-
 Le jeu de données utilisé est celui du **cancer du sein** fourni par Scikit-learn.
 
 ---
